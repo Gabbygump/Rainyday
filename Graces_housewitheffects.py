@@ -9,7 +9,7 @@ pygame.init()
 
 # Window
 SIZE = (800, 600)
-TITLE = "My Awesome Picture"
+TITLE = "The picked cherry tree"
 screen = pygame.display.set_mode(SIZE)
 pygame.display.set_caption(TITLE)
 
@@ -18,6 +18,10 @@ pygame.display.set_caption(TITLE)
 clock = pygame.time.Clock()
 refresh_rate = 60
 
+key_down_left = False
+key_down_right = False
+key_down_up = False
+key_down_down = False
 
 # Colors
 ''' add colors you use as RGB values here '''
@@ -33,11 +37,11 @@ DARKGREY = ( 125, 125, 125)
 YELLOW = (253,253,0)
 DARKBLUE = (0,153,255)
 def draw_cloud(x, y):
-    pygame.draw.ellipse(screen, GREY, [x, y + 20, 40 , 40])
-    pygame.draw.ellipse(screen, GREY, [x + 60, y + 20, 40 , 40])
-    pygame.draw.ellipse(screen, GREY, [x + 20, y + 10, 25, 25])
-    pygame.draw.ellipse(screen, GREY, [x + 35, y, 50, 50])
-    pygame.draw.rect(screen, GREY, [x + 20, y + 20, 60, 40])
+    pygame.draw.ellipse(screen, WHITE, [x, y + 20, 40 , 40])
+    pygame.draw.ellipse(screen, WHITE, [x + 60, y + 20, 40 , 40])
+    pygame.draw.ellipse(screen, WHITE, [x + 20, y + 10, 25, 25])
+    pygame.draw.ellipse(screen, WHITE, [x + 35, y, 50, 50])
+    pygame.draw.rect(screen, WHITE, [x + 20, y + 20, 60, 40])
 
 ''' make clouds '''
 clouds = []
@@ -50,14 +54,25 @@ lights_on = False
 ''' make stars '''
 stars = []
 for n in range(800):
-    x = random.randrange(0, 1600)
-    y = random.randrange(0, 800)
+    x = random.randrange(0, 800)
+    y = random.randrange(0, 1200)
     r = random.randrange(1, 5)
     stars.append([x, y, r, r])
-    
+ladybug_position = [300,200]
+def draw_ladybug(x,y):
+    pygame.draw.ellipse(screen, RED, [x, y, 40, 40])
+
+
+smoke = []
+for s in range(20):
+    x = s * 50 + 150
+    smoke.append(x)
+
+def make_snow(x, y):
+    pygame.draw.ellipse(screen, WHITE, [x, y, 10, 10])
 # Game loop
 done = False
-
+rain = False
 while not done:
     # Event processing
     for event in pygame.event.get():
@@ -70,9 +85,30 @@ while not done:
                 lights_on = not lights_on
             elif event.key == pygame.K_SPACE:
                 sun = not sun
-            elif even.key == pygame.K_s:
+            elif event.key == pygame.K_r:
                 rain = not rain
+            elif event.key == pygame.K_LEFT:
+                key_down_left = True
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT:
+                key_down_left = False
+            
                 
+
+
+    if key_down_left:
+        
+        if ladybug_position[0] <= 0:
+              ladybug_position[0] = 0
+        else:
+            ladybug_position[0] -= 5
+
+    if key_down_right:
+        
+        if ladybug_position[0] <= 0:
+              ladybug_position[0] = 0
+        else:
+            ladybug_position[0] = 5
         
                 
 
@@ -92,8 +128,11 @@ while not done:
 
         if s[1] > 700:
           
-            s[0] = random.randrange(50, 2000)
+            s[0] = random.randrange(0, 2000)
             s[1] = random.randrange (-200,0)
+
+    ''' move smoke ''' 
+    smoke = [s + 1 if s < 800 else 150 for s in smoke]
             
     ''' set sky color '''
     if daytime:
@@ -108,10 +147,10 @@ while not done:
         window_color = WHITE
 
     ''' set rain'''
-    if daytime:
-        rain = False
+    if rain:
+        rain_off = False
     else:
-        rain = True
+        rain_on = True
     '''change sun color'''
     if daytime:
         sun = YELLOW
@@ -138,13 +177,21 @@ while not done:
     pygame.draw.ellipse(screen, RED, [200, 420, 20, 20])
     pygame.draw.ellipse(screen, RED, [100, 380, 20, 20])
 
+    for s in smoke:
+        x = s
+        y = (15 *(0-1) * (math.sqrt(x - 25)) + 450)+30
+        
+        pygame.draw.ellipse(screen, GREY, [x + 415, y, 25, 25])
+    if s == 850:
+        x = s[2]
+
     '''sun'''
     pygame.draw.ellipse(screen, sun, [650, 0, 150, 150])
 
     ''' stars '''
     if rain == True:
         for s in stars:
-            pygame.draw.ellipse(screen, BLUE, s)
+            pygame.draw.ellipse(screen, DARKBLUE, s)
     
     ''' clouds '''
     for c in clouds:
@@ -182,8 +229,8 @@ while not done:
     pygame.draw.rect(screen, window_color, [530, 420, 60, 60])
     pygame.draw.rect(screen,window_color, [330, 420, 60, 60])
 
-
-
+    draw_ladybug(ladybug_position[0],ladybug_position[1])
+    
 
     
     ''' angles for arcs are measured in radians (a pre-cal topic) '''
