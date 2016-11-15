@@ -9,7 +9,7 @@ pygame.init()
 
 # Window
 SIZE = (800, 600)
-TITLE = "The picked cherry tree"
+TITLE = "The fruit trees"
 screen = pygame.display.set_mode(SIZE)
 pygame.display.set_caption(TITLE)
 
@@ -61,11 +61,18 @@ for n in range(800):
 ladybug_position = [300,200]
 def draw_ladybug(x,y):
     pygame.draw.ellipse(screen, RED, [x, y, 40, 40])
+    pygame.draw.ellipse(screen, BLACK, [x + 10, y + 10, 6, 6])
+    pygame.draw.ellipse(screen, BLACK, [x + 10, y +20, 6, 6])
+    pygame.draw.ellipse(screen, BLACK, [x + 25, y +20, 6, 6])
+    pygame.draw.ellipse(screen, BLACK, [x + 25, y + 10, 6, 6])
+    pygame.draw.line(screen, BLACK, [ x + 20, y + 40], [ x + 20, y], 5)
+    pygame.draw.line(screen, BLACK, [x + 35, y - 10], [x +25,  y + 2], 5)
+    pygame.draw.line(screen, BLACK, [x + 5, y - 10], [x + 15, y + 2], 5)
 
 
 smoke = []
 for s in range(20):
-    x = s * 50 + 150
+    x = s * 60 + 150
     smoke.append(x)
 
 def make_snow(x, y):
@@ -131,7 +138,7 @@ while not done:
 
     if key_down_down:
         
-        if ladybug_position[1] >= 800:
+        if ladybug_position[1] >= 540:
             ladybug_position[1] = ladybug_position[1]  
         else:
             ladybug_position[1] += 5
@@ -192,18 +199,46 @@ while not done:
     pygame.draw.rect(screen, BROWN, [100, 410, 40, 300])
     pygame.draw.rect(screen, GREEN, [0, 580, 800, 50])
     pygame.draw.ellipse(screen, GREEN, [20, 330, 210, 180])
+    pygame.draw.ellipse(screen, RED, [30, 410, 20, 20])
+    pygame.draw.ellipse(screen, RED, [30, 440, 20, 20])
+    pygame.draw.ellipse(screen, RED, [30, 380, 20, 20])
+    pygame.draw.ellipse(screen, RED, [60, 410, 20, 20])
+    pygame.draw.ellipse(screen, RED, [100, 410, 20, 20])
+    pygame.draw.ellipse(screen, RED, [130, 410, 20, 20])
+    pygame.draw.ellipse(screen, RED, [170, 410, 20, 20])
+    pygame.draw.ellipse(screen, RED, [200, 410, 20, 20])
+    pygame.draw.ellipse(screen, RED, [200, 380, 20, 20])
+    pygame.draw.ellipse(screen, RED, [200, 440, 20, 20])
+    pygame.draw.ellipse(screen, RED, [60, 440, 20, 20])
+    pygame.draw.ellipse(screen, RED, [60, 380, 20, 20])
+    pygame.draw.ellipse(screen, RED, [60, 470, 20, 20])
+    pygame.draw.ellipse(screen, RED, [60, 350, 20, 20])
     pygame.draw.ellipse(screen, RED, [100, 440, 20, 20])
-    pygame.draw.ellipse(screen, RED, [50, 430, 20, 20])
-    pygame.draw.ellipse(screen, RED, [60, 460, 20, 20])
-    pygame.draw.ellipse(screen, RED, [80, 420, 20, 20])
-    pygame.draw.ellipse(screen, RED, [120, 420, 20, 20])
-    pygame.draw.ellipse(screen, RED, [80, 390, 20, 20])
-    pygame.draw.ellipse(screen, RED, [120, 390, 20, 20])
-    pygame.draw.ellipse(screen, RED, [120, 390, 20, 20])
-    pygame.draw.ellipse(screen, RED, [120, 345, 20, 20])
-    pygame.draw.ellipse(screen, RED, [80, 345, 20, 20])
-    pygame.draw.ellipse(screen, RED, [200, 420, 20, 20])
     pygame.draw.ellipse(screen, RED, [100, 380, 20, 20])
+    pygame.draw.ellipse(screen, RED, [100, 480, 20, 20])
+    pygame.draw.ellipse(screen, RED, [100, 340, 20, 20])
+    pygame.draw.ellipse(screen, RED, [130, 440, 20, 20])
+    pygame.draw.ellipse(screen, RED, [130, 340, 20, 20])
+    pygame.draw.ellipse(screen, RED, [130, 480, 20, 20])
+    pygame.draw.ellipse(screen, RED, [130, 380, 20, 20])
+    pygame.draw.ellipse(screen, RED, [170, 440, 20, 20])
+    pygame.draw.ellipse(screen, RED, [170, 380, 20, 20])
+    pygame.draw.ellipse(screen, RED, [170, 470, 20, 20])
+    pygame.draw.ellipse(screen, RED, [170, 350, 20, 20])
+    pygame.draw.rect(screen, BROWN, [670, 410, 40, 300])
+    pygame.draw.ellipse(screen, GREEN, [610, 330, 180, 150])
+    pygame.draw.ellipse(screen, ORANGE, [620, 380, 20, 20])
+    pygame.draw.ellipse(screen, ORANGE, [620, 420, 20, 20])
+    pygame.draw.ellipse(screen, ORANGE, [660, 420, 20, 20])
+    pygame.draw.ellipse(screen, ORANGE, [660, 380, 20, 20])
+    pygame.draw.ellipse(screen, ORANGE, [660, 450, 20, 20])
+    pygame.draw.ellipse(screen, ORANGE, [660, 340, 20, 20])
+    pygame.draw.ellipse(screen, ORANGE, [705, 420, 20, 20])
+    pygame.draw.ellipse(screen, ORANGE, [705, 340, 20, 20])
+    pygame.draw.ellipse(screen, ORANGE, [705, 450, 20, 20])
+    pygame.draw.ellipse(screen, ORANGE, [705, 380, 20, 20])
+    pygame.draw.ellipse(screen, ORANGE, [750, 420, 20, 20])
+    pygame.draw.ellipse(screen, ORANGE, [750, 380, 20, 20])
 
     for s in smoke:
         x = s
@@ -257,13 +292,7 @@ while not done:
     pygame.draw.rect(screen, window_color, [530, 420, 60, 60])
     pygame.draw.rect(screen,window_color, [330, 420, 60, 60])
 
-    '''ladybug'''
-    pygame.draw.ellipse(screen, RED, [400, 100, 100, 100])
-    pygame.draw.ellipse(screen, BLACK, [420, 110, 20, 20])
-    pygame.draw.ellipse(screen, BLACK, [420, 150, 20, 20])
-    pygame.draw.ellipse(screen, BLACK, [465, 150, 20, 20])
-    pygame.draw.ellipse(screen, BLACK, [465, 110, 20, 20])
-    pygame.draw.line(screen, BLACK, [420, 110], [465, 110], 5)
+
     
 
     draw_ladybug(ladybug_position[0],ladybug_position[1])
